@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.ehcache.org/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ehcache.org/v3 xsd/ehcache-core-3.7.xsd">
+
+    <!-- Persistent cache directory -->
+    <persistence directory="spring-boot-ehcache/cache" />
+
+    <!-- Default cache template -->
+    <cache-template name="default">
+        <expiry>
+            <!-- Defines a time to live (ttl) of 30 seconds for how long an entry may remain in the
+            cache (whether it has been accessed or not) -->
+            <ttl unit="seconds">30</ttl>
+            <!-- Alternatively, a time to idle (tti) can be set that specifies how long an entry may
+            remain in the cache without being accessed, a choice has to be made of whether ttl or
+            tti is used (i.e. can't specify both) -->
+            <!-- <tti unit="seconds">30</tti>-->
+        </expiry>
+
+        <listeners>
+            <listener>
+                <class>org.pdbcorp.spring.configs.CalculationCacheLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <event-ordering-mode>UNORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+                <events-to-fire-on>EVICTED</events-to-fire-on>
+            </listener>
+        </listeners>
+
+        <resources>
+            <heap>1000</heap>
+            <offheap unit="MB">10</offheap>
+            <disk persistent="true" unit="MB">20</disk>
+        </resources>
+    </cache-template>
+
+    <cache alias="areaOfCircleCache" uses-template="default">
+        <key-type>java.lang.Integer</key-type>
+        <value-type>java.lang.Double</value-type>
+    </cache>
+
+    <cache alias="multiplyCache" uses-template="default">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.Double</value-type>
+    </cache>
+
+    <cache alias="studentCache" uses-template="default">
+        <key-type>java.lang.Long</key-type>
+        <value-type>org.pdbcorp.spring.models.Student</value-type>
+    </cache>
+</config>

@@ -1,0 +1,4 @@
+#Key and value types
+#Fri Apr 26 18:48:59 PDT 2024
+valueType=org.pdbcorp.spring.models.Student
+keyType=java.lang.Long

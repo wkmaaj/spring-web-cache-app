@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-web-cache-app
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
