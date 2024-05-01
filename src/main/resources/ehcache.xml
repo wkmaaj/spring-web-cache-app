@@ -49,4 +49,8 @@
         <key-type>java.lang.Long</key-type>
         <value-type>org.pdbcorp.spring.models.Student</value-type>
     </cache>
+
+    <cache alias="submissionIds"></cache>
+
+    <cache alias="generatedIds"></cache>
 </config>
